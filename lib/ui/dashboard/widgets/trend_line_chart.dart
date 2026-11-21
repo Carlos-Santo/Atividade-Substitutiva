@@ -109,7 +109,11 @@ class TrendLineChart extends StatelessWidget {
                 interval: interval,
                 getTitlesWidget: (value, meta) {
                   final point = byNumber[value.toInt()];
-                  if (point == null || value != value.roundToDouble()) {
+                  final previous = byNumber[value.toInt() - interval.toInt()];
+                  if (point == null ||
+                      value != value.roundToDouble() ||
+                      (previous != null &&
+                          ChartScale.sameDay(previous.date, point.date))) {
                     return const SizedBox.shrink();
                   }
                   return SideTitleWidget(

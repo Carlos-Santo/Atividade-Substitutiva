@@ -179,7 +179,7 @@ Principais decisões:
 
 ```bash
 flutter analyze   # análise estática: sem avisos
-flutter test      # 70 testes
+flutter test      # 73 testes
 ```
 
 | Camada | O que é testado |
@@ -214,6 +214,14 @@ flutter test --update-goldens --tags screenshots tool/screenshots
 | Novo abastecimento | Veículo cadastrado | Exclusão com confirmação |
 |:---:|:---:|:---:|
 | <img src="docs/screenshots/07-novo-abastecimento.png" width="230"> | <img src="docs/screenshots/08-veiculo.png" width="230"> | <img src="docs/screenshots/09-confirmar-exclusao.png" width="230"> |
+
+### Rodando no Android
+
+Capturas do APK instalado num celular Android, com dados digitados na hora:
+
+| Lista de abastecimentos | Novo abastecimento | Indicadores | Exclusão do veículo |
+|:---:|:---:|:---:|:---:|
+| <img src="docs/screenshots/android-01-abastecimentos.jpg" width="190"> | <img src="docs/screenshots/android-02-novo-abastecimento.jpg" width="190"> | <img src="docs/screenshots/android-03-indicadores.jpg" width="190"> | <img src="docs/screenshots/android-04-confirmar-exclusao.jpg" width="190"> |
 
 **Tablet, modo escuro**: navegação lateral, indicadores em uma linha e gráficos lado a lado.
 

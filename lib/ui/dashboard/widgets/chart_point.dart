@@ -26,6 +26,11 @@ abstract final class ChartScale {
   static double labelInterval(int count, {int maxLabels = 6}) =>
       math.max(1, (count / maxLabels).ceil()).toDouble();
 
+  /// Indica se dois rótulos do eixo X mostrariam a mesma data (dd/MM).
+  /// Usado para não repetir o dia quando há vários abastecimentos nele.
+  static bool sameDay(DateTime a, DateTime b) =>
+      a.year == b.year && a.month == b.month && a.day == b.day;
+
   /// Limites do eixo Y com uma folga, para a linha não encostar nas bordas.
   static ({double min, double max}) paddedRange(Iterable<double> values) {
     final minValue = values.reduce(math.min);
