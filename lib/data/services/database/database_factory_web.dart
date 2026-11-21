@@ -1,0 +1,7 @@
+import 'package:sqflite/sqflite.dart';
+import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
+
+DatabaseFactory createDatabaseFactory() => databaseFactoryFfiWeb;
+
+Future<String> databaseDirectory(DatabaseFactory factory) =>
+    factory.getDatabasesPath();

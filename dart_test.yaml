@@ -1,0 +1,6 @@
+# Tags dos testes. Os marcados com "live" acessam a internet e ficam fora da
+# execução padrão; os de "screenshots" geram as imagens do README.
+tags:
+  screenshots:
+  live:
+    skip: 'Consulta a BrasilAPI real. Rode com: flutter test --run-skipped --tags live'

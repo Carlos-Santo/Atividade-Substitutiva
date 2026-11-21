@@ -1,0 +1,59 @@
+# Integração contínua: a cada push ou pull request, verifica o código,
+# roda os testes e gera o APK Android para instalar no celular.
+#
+# O APK fica disponível na aba "Actions" do GitHub, na execução do workflow,
+# em "Artifacts" → "tanque-cheio-apk".
+name: Testes e APK
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch: # permite rodar manualmente pela aba Actions
+
+# Um push novo na mesma branch cancela a execução anterior, ainda em andamento.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Analisar, testar e gerar APK
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@v4
+
+      - name: Instalar Java 17 (exigido pelo Gradle do Android)
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+          cache: gradle
+
+      - name: Instalar Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.47.3
+          cache: true
+
+      - name: Baixar dependências
+        run: flutter pub get
+
+      - name: Análise estática
+        run: flutter analyze
+
+      - name: Testes
+        run: flutter test
+
+      - name: Gerar APK
+        run: flutter build apk --release
+
+      - name: Publicar o APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: tanque-cheio-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
+          retention-days: 30
