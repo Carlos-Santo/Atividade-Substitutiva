@@ -63,7 +63,14 @@ class CostBarChart extends StatelessWidget {
                   reservedSize: 28,
                   getTitlesWidget: (value, meta) {
                     final index = value.toInt();
-                    if (index % interval.toInt() != 0) {
+                    final step = interval.toInt();
+                    final previous = index - step;
+                    if (index % step != 0 ||
+                        (previous >= 0 &&
+                            ChartScale.sameDay(
+                              points[previous].date,
+                              points[index].date,
+                            ))) {
                       return const SizedBox.shrink();
                     }
                     return SideTitleWidget(
